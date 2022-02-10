@@ -1,0 +1,14 @@
+// shadows
+
+@mixin  shadow-big{
+  box-shadow: 0 0 rem(3) fade_out($black, 0.8);
+}
+
+@mixin  shadow-big-dark{
+  box-shadow: 0 0 rem(3) fade_out($black, 0.2);
+}
+
+@mixin  shadow-big-shift-y($shift-y: 0){
+  box-shadow: 0 $shift-y rem(3) fade_out($black, 0.8);
+}
+

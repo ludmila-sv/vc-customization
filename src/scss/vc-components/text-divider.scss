@@ -1,0 +1,21 @@
+.wpb_wrapper > .pf-text-divider {
+	margin: 0;
+	padding: 25px 0;
+}
+@media (min-width: 992px) {
+	.pf-text-divider {
+		display: flex;
+		align-items: stretch;
+	}
+	.pf-text-divider .pf-text-divider__h {
+		display: flex;
+		align-items: center;
+		width: 25%;
+		padding-right: 30px;
+	}
+	.pf-text-divider .pf-text-divider__text {
+		width: 75%;
+		padding-left: 75px;
+		border-left: 2px solid currentColor;
+	}
+}

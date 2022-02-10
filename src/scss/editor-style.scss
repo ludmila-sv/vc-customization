@@ -1,0 +1,44 @@
+@import "functions";
+/*
+* Here goes our TinyMCE embedded styles for ease of editing.
+*/
+@import "overrides";// load our grid custom breakpoints and override bootstrap's variables if needed
+
+// our local styles and mixins
+
+@import "variables"; // we load our own theme's variables after bootstrap's to make sure we override colors and  other stuff
+@import "mixins/*";
+
+//@import 'partials/components/buttons';
+.wpb_pf_vc_logo_tab.wpb_content_element,
+.wpb_pf_vc_logo_slide.wpb_content_element {
+	.wpb_element_title {
+		overflow: hidden;
+	}
+	.tab_title,
+	.title {
+		font-family: $headings-font;
+		font-weight: $font-weight-bold;
+		font-size: rem( 2.6 );
+		line-height: 1.2;
+		letter-spacing: -0.13em;
+		text-transform: uppercase;
+		margin-bottom: rem( 1 );
+
+		p {
+			font-size: rem( 2.6 );
+			line-height: 1.2;
+		}
+	}
+
+	img.tab_logo,
+	img.logo {
+		width: 150px;
+		height: auto;
+		margin: 30px 0 20px;
+	}
+
+	.description {
+		font-style: normal;
+	}
+}

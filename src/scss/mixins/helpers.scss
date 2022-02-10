@@ -1,0 +1,96 @@
+// grid helpers
+@mixin make-container-max-widths-since($since-breakpoint: xs,$max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+	$since-found: false;
+
+	@each $breakpoint, $container-max-width in $max-widths {
+		@if $breakpoint == $since-breakpoint{
+			$since-found: true;
+		}
+		@if $since-found{
+			@include media-breakpoint-up($breakpoint, $breakpoints) {
+				max-width: $container-max-width;
+			}
+		}
+
+	}
+}
+
+@mixin list-unstyled(){
+	list-style: none;
+}
+
+@mixin list-unstyled-at-all {
+	@include list-unstyled();
+	padding: 0;
+	margin: 0;
+}
+
+@mixin optimize2DAnimationsOn3D() {
+	backface-visibility: hidden;
+	perspective: 1000;
+}
+
+
+@mixin inline-svg-bg($svg-string){
+	background-image: url('data:image/svg+xml;charset=utf-8,#{url-encode($svg-string)}');
+}
+
+
+@mixin section-background-img(){
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+
+	img{
+		height: 100%;
+		max-width: unset;
+		min-width: 100%;
+		object-fit: cover;
+		object-position: center;
+		width: 0;
+	}
+}
+
+@mixin retina{
+	@media (min-device-pixel-ratio: 1.5){
+		@content;
+	}
+}
+
+@mixin border-for-photo($color: $green, $width: rem(0.2) ){
+	position: relative;
+	img {
+		display: block;
+		position: relative;
+		z-index: 2;
+		width: 100%;
+	}	
+
+	&:before{
+		content: '';
+		display: block;
+		position: absolute;
+		top: $width;
+		right: -$width;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		background: $color;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 3;
+		border: $width solid $color;
+	}
+
+}

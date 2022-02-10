@@ -1,0 +1,79 @@
+// in fact it's just standard container started from LG.
+@mixin container-standard {
+	//width: 100%;
+	//@include make-container();
+	//@include media-breakpoint-up(lg) {
+	//	max-width: 900px;
+	//}
+	//@include media-breakpoint-up(hd) {
+	//	max-width: 1200px;
+	//}
+	//@include media-breakpoint-up(xxl) {
+	//	max-width: 1364px;
+	//}
+	@include make-container();
+	@include make-container-max-widths-since(lg);
+}
+
+@mixin container-smaller {
+	width: 100%;
+	@include make-container();
+	@include media-breakpoint-up($bp) {
+		max-width: $wider-container;
+	}
+	//@include make-container-max-widths-since($bp);
+}
+
+// smallest one.
+@mixin container-content {
+	//width: 100%;
+	//max-width: 95%;
+	@include make-container();
+
+	@include media-breakpoint-up(md) {
+		max-width: 600+$grid-gutter-width; /* set from salient 600px + 30px on side paddings*/
+	}
+
+	@include media-breakpoint-up(lg) {
+		max-width: 800+$grid-gutter-width; /* set from salient 800px + 30px on side paddings*/
+	}
+}
+
+
+@mixin make-to-fullwidth {
+	margin-left: calc(-100vw / 2 + 100% / 2);
+	margin-right: calc(-100vw / 2 + 100% / 2);
+	max-width: 100vw;
+}
+
+
+@mixin make-to-wide {
+
+	@include media-breakpoint-up($bp) {
+		margin-left: calc(100% / 2 - #{$wider-container / 2});
+		margin-right: calc(100% / 2 - #{$wider-container / 2});
+	}
+}
+
+//@mixin fixed-width-container() {
+//	//width: 100%;
+//	//max-width: 95%;
+//	//margin: auto;
+//	//
+//	//@include media-breakpoint-up(md){
+//	//	max-width: 700px;
+//	//}
+//	//
+//	//@include media-breakpoint-up(xl){
+//	//	max-width: 920px;
+//	//}
+//	@include content-width;
+//}
+
+
+@mixin ragged-edge {
+	background-size: auto 100%;
+	@include media-breakpoint-up(xxl) {
+		background-size: 100% 100%;
+	}
+}

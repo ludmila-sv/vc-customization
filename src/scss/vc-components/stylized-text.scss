@@ -1,0 +1,46 @@
+body .pf-text-stylized {
+	@each $classname, $color in $local-colors {
+		&.text-color-#{$classname} {
+			color: $color;
+		}
+	}
+	@each $classname, $color in $local-colors {
+		&.underline-color-#{$classname} {
+			span[style*='underline'],
+			u {
+				@include highlight($color);
+				background-size: 1em auto;
+			}
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		color: inherit;
+	}
+
+	em {
+		font-family: 'Patrima-Outline', sans-serif;
+		font-style: normal;
+		font-weight: 400;
+	}
+	span[style*='underline'],
+	u {
+		text-decoration: none !important;
+		font-family: 'Patrima', sans-serif;
+	}
+	strong,
+	b {
+		display: inline-block;
+		padding: 0.1em 0.2em 0.1em 0.12em;
+		border: 3px solid currentColor;
+		font-family: 'Patrima', sans-serif;
+		font-weight: 700;
+		line-height: 1;
+	}
+}

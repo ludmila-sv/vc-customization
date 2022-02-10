@@ -1,0 +1,13 @@
+.pf-heading {
+	position: relative;
+	line-height: 1.2;
+	letter-spacing: -0.13em;
+}
+.pf-heading img {
+	position: absolute;
+	top: 0.22em;
+	left: -0.15em;
+	width: auto;
+	height: 0.78em !important;
+	transform: translateX( -100% );
+}

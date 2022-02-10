@@ -1,0 +1,29 @@
+/* Load bootstrap with custom variables */
+$spacer: rem( 2 );
+$grid-gutter-width: rem( 3 );
+
+/* Override breakpoints as we need more for larger screens */
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	hd: 1440px,
+	xxl: 1800px,
+) !default;
+
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px,
+	hd: 1275px,
+	xxl: 1280px,
+) !default;
+
+/* mobile menu breakpoint */
+$bp: lg;
+$bp-down: md;
+
+$wider-container: 1088px;

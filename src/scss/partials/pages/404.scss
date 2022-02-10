@@ -1,0 +1,219 @@
+/* 404 page */
+.error404 {
+
+	&__header{
+		position: fixed;
+		top: $site-header-height-mobile;
+		@include media-breakpoint-up($bp){
+			top: $site-header-height;
+		}
+		left: 0;
+		right: 0;
+		height: 15vw;
+		overflow: hidden;
+
+		h1{
+			@include sr-only;
+		}
+
+		&-bg{
+			position: absolute;
+			top: -25%;
+			left: 0;
+			right: 0;
+			bottom: -25%;
+			background-image: url("../images/404-heading_shorter.svg");
+			background-position: center;
+			background-size: auto 100%;
+			height: 150%;
+		}
+
+		// shift it down.
+		+ .error404__content{
+			margin-top: 15vw;
+		}
+
+		&_full-height{
+			position: relative;
+			top: 0;
+			height: 37.5vh;
+		}
+
+	}
+
+	&__content {
+		position: relative;
+		z-index: 1;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: $white;
+		padding-bottom: rem(3) ;
+		@include shadow-big-dark;
+
+		@media (orientation: portrait){
+			min-height: 45vh;
+		}
+
+		&-heading {
+			padding: 0 $grid-gutter-width/2;
+			overflow: hidden;
+			.lost-top-text {
+				text-align: center;
+				line-height: 30vh;
+				font-size: 4vh;
+				filter: blur(2px);
+				@media(orientation: portrait){
+					font-size: 2.5vh;
+				}
+				@include media-breakpoint-down($bp-down){
+					filter: blur(1px);
+				}
+				@media(max-width: map_get($grid-breakpoints, sm)) and(orientation: portrait){
+					font-size: 2.5vh;
+				}
+
+				letter-spacing: 0.2em;
+				//transform: perspective(300px) rotate3d(-56, -294, 150, 45deg) translate(-8vw,-6vh);
+
+				transform: translate(-1vw, -3vh);
+				perspective:  900px;
+
+				animation-name: lostSpinner;
+				animation-timing-function: linear;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+				animation-duration: 10s;
+			}
+
+			@-webkit-keyframes lostSpinner {
+				from {
+					-webkit-transform: rotate3d(48,-300,25,-70deg);
+				}
+
+				to {
+					-webkit-transform: rotate3d(-110, 0, 35, 40deg) scale(2);
+					filter: blur(0.5px);
+				}
+			}
+
+			@keyframes lostSpinner {
+				from {
+					-moz-transform: rotate3d(48,-300,25,-70deg);
+					-ms-transform: rotate3d(48,-300,25,-70deg);
+					-o-transform:rotate3d(48,-300,25,-70deg) ;
+					transform: rotate3d(48,-300,25,-70deg);//rotate3d(0, 0 ,0 ,0deg);
+				}
+				to {
+					-moz-transform: rotate3d(-110, 0, 35, 40deg) scale(2);
+					-ms-transform: rotate3d(-110, 0, 35, 40deg) scale(2);
+					-o-transform: rotate3d(-110, 0, 35, 40deg) scale(2);
+					transform:rotate3d(-110, 0, 35, 40deg) scale(2); // rotate3d(-100, -220, 51, 57deg) scale(2) ;
+					filter: blur(0.5px);
+				}
+			}
+
+			.top-image {
+				height: 30vh;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				margin: 75px 0;
+				//margin-bottom: 5vh;
+				//margin-top: 3vh;
+				//max-height: 195px;
+				//@media(max-width: @screen-sm-max){
+				max-height: 150px;
+				//}
+				&-empty{
+					height: rem(7.5) ;
+				}
+			}
+		}
+
+		h2 {
+			font: bold 16pt/1em $headings-font; //600
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin: 0 auto 1em;
+			@include media-breakpoint-down(md){
+				margin: 1em 0;
+			}
+		}
+
+		&-wrapper{
+			@include make-row();
+			justify-content: space-evenly;
+
+			.textual {
+				position: relative;
+				width: 100%;
+				padding-right: $grid-gutter-width/2;
+				padding-left: $grid-gutter-width/2;
+				margin-bottom: 2em;
+				font: 300 14pt/1.5em $content-font; //400
+
+				@include media-breakpoint-up( md ) {
+					flex: 0 0 41.66667%;
+					max-width: 41.66667%;
+				}
+				@include media-breakpoint-up( lg ) {
+					flex: 0 0 33.33333%;
+					max-width: 33.33333%;
+				}
+
+				a {
+					text-decoration: underline;
+					&:hover{
+						text-decoration: none;
+					}
+				}
+			}
+			.graphic {
+				position: relative;
+				width: 100%;
+				padding-right: $grid-gutter-width/2;
+				padding-left: $grid-gutter-width/2;
+
+				@include media-breakpoint-up( md ) {
+					flex: 0 0 41.66667%;
+					max-width: 41.66667%;
+				}
+				@include media-breakpoint-up( lg ) {
+					flex: 0 0 33.33333%;
+					max-width: 33.33333%;
+				}
+
+				img {
+					max-width: 100%;
+					height: auto;
+					margin: 0 auto;
+					display: block;
+					// box-shadow: 0 rem(1) rem(2.5) ;
+				}
+				a {
+					display: block;
+					color: $white;
+					font: 300 13pt/1em $content-font; //400
+					text-decoration: underline;
+					font-style: italic;
+					&:hover{
+						text-decoration: none;
+					}
+					.action {
+						display: block;
+						text-align: center;
+						margin: 2em auto 4em;
+					}
+
+				}
+			}
+		}
+	}
+
+}
+.container-wrap__footer {
+	padding-top: 0 !important;
+	.before-footer {
+		padding-top: 0 !important;
+	}
+}

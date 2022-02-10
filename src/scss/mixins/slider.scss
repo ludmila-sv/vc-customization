@@ -1,0 +1,119 @@
+@mixin slider-controls-order(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .slick-prev{
+    order: 1;
+  }
+
+  .slick-dots{
+    margin: 0 $spacer;
+    order: 2;
+    width: auto;
+  }
+
+  .slick-next{
+    order: 3;
+  }
+
+}
+
+@mixin slider-controls($main-color: $light){
+
+  .slick-prev,
+  .slick-next {
+    &:before {
+      color: $main-color;
+    }
+  }
+
+  .slick-dots {
+    li {
+      button {
+        &:hover, &:focus {
+          outline: none;
+          &:before {
+            background: fade_out($main-color, $slick-opacity-not-active);
+          }
+        }
+        &:before {
+          color: $main-color;
+        }
+      }
+      &.slick-active button:before {
+        background: $main-color;
+        color: $main-color;
+      }
+    }
+  }
+
+}
+
+@mixin overflow-slider-with-fade(){
+
+  transition: opacity 0.2s;
+  opacity: 0;
+  &.slick-initialized{
+    opacity: 1;
+  }
+
+  .slick-list{
+    overflow: visible;
+  }
+  .slick-slide {
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    &.slick-active,
+    &.slick-current{
+      opacity: 1;
+      & + .slick-slide {
+        opacity: 1;
+      }
+    }
+
+    .injected {
+      opacity: 1;
+      transition: opacity 0.2s;
+      &.loading{
+        opacity: 0;
+      }
+    }
+
+  }
+
+}
+
+// overflows slider's container and fades in-out only one slide.
+@mixin overflow-slider-fade-single{
+
+  transition: opacity 0.2s;
+  opacity: 0;
+  &.slick-initialized{
+    opacity: 1;
+  }
+
+  .slick-list{
+    overflow: visible;
+  }
+  .slick-slide {
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    &.slick-active,
+    &.slick-current{
+      opacity: 1;
+    }
+
+    .injected {
+      opacity: 1;
+      transition: opacity 0.2s;
+      &.loading{
+        opacity: 0;
+      }
+    }
+
+  }
+
+}

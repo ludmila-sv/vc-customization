@@ -1,0 +1,120 @@
+.logo-tabs-slider {
+	position: relative;
+	z-index: 1;
+	padding: rem( 3 ) 0;
+
+	&__container {
+		position: relative;
+		@include container-smaller;
+		margin: auto;
+		padding-top: rem( 3 );
+		padding-bottom: rem( 3 );
+		text-align: center;
+	}
+
+	h2 {
+		text-align: center;
+		margin-bottom: rem( 3 );
+		@include media-breakpoint-up( md ) {
+			margin-bottom: rem( 10 );
+		}
+	}
+
+	&__logos {
+		display: none;
+		@include media-breakpoint-up( md ) {
+			display: flex;
+		}
+		justify-content: center;
+		flex-wrap: wrap;
+
+		a {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding-bottom: rem( 2 );
+			overflow: hidden;
+			transition: opacity 0.3s;
+			opacity: 0.5;
+
+			span {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: rem( 0.3 );
+				transition: transform 0.3s;
+				transform: scaleX( 0 );
+			}
+
+			&.active {
+				opacity: 1;
+
+				span {
+					transform: scaleX( 1 );
+				}
+			}
+		}
+	}
+
+	&__logo {
+		margin: 0 rem( 3 ) rem( 5 );
+	}
+
+	.project-logo {
+		width: 163.6px;
+		@include media-breakpoint-down( xl ) {
+			width: 150px;
+		}
+	}
+
+	&__slides {
+		@include slider-controls( $dark-blue );
+		.slick-dots {
+			padding-top: rem( 2 );
+		}
+	}
+
+	&__slide {
+		&-inner {
+			display: flex;
+			flex-direction: column;
+			@include media-breakpoint-up( md ) {
+				flex-direction: row;
+				text-align: initial;
+			}
+		}
+
+		&-logo {
+			margin: rem( 3 ) auto;
+			@include media-breakpoint-up( md ) {
+				display: none;
+			}
+		}
+
+		&-content {
+			@include media-breakpoint-up( md ) {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				width: 50%;
+				padding-right: $grid-gutter-width;
+			}
+		}
+
+		&-image {
+			display: none;
+			@include media-breakpoint-up( md ) {
+				display: block;
+				width: 50%;
+				padding-left: $grid-gutter-width;
+			}
+		}
+
+		&-btn {
+			margin-top: rem( 3 );
+		}
+	}
+}

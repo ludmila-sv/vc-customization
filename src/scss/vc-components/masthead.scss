@@ -1,0 +1,48 @@
+.pf-masthead {
+	margin: 0 !important;
+
+	@each $classname, $color in $local-colors {
+		&.text-color-#{$classname} {
+			color: $color;
+		}
+		&.divider-color-#{$classname} {
+			.pf-masthead__txt {
+				border-color: $color;
+			}
+		}
+	}
+
+	@media ( min-width: 1000px ) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto !important;
+	}
+
+	&__img {
+		margin: 0 0 rem( 3 );
+		@media ( min-width: 1000px ) {
+			margin: 0;
+			padding: 0 rem( 2 ) 0 0;
+		}
+
+		img {
+			display: block;
+			margin: 0 auto !important;
+			@media ( min-width: 1000px ) {
+				margin: 0 !important;
+			}
+		}
+	}
+
+	&__txt {
+		text-align: center;
+		@media ( min-width: 1000px ) {
+			//flex: 1 0 70%;
+			padding: 0 0 0 rem( 2 );
+			border-left-width: 2px;
+    		border-left-style: solid;
+			text-align: left;
+		}
+	}
+}

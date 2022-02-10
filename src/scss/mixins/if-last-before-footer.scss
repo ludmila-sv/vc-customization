@@ -1,0 +1,5 @@
+@mixin if-last-before-footer($margin-top: rem(8) ){
+	+ footer{ // in case it's the last block.
+		margin-top: $margin-top;
+	}
+}

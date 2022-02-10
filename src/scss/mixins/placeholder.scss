@@ -1,0 +1,12 @@
+@mixin placeholder{
+	&::placeholder{
+		color: $middle-gray;
+	}
+}
+@mixin placeholder-light{
+	&::placeholder{
+		font-size: rem(1.6) ;
+		line-height: 1.4;
+		color: $gray-opacity50;
+	}
+}

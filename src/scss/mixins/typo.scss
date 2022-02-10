@@ -1,0 +1,400 @@
+// typography mixins
+
+/** Mixins to generate styles mixins for textual entities from $local-font-rules */
+@mixin make-font-style($type, $mode: 'mobile', ) {
+	$ruleset: map-get($local-font-rules, $type);
+
+	$weight: map-get($ruleset, 'font-weight');
+	$size: map-get($ruleset, 'font-size');
+	$line-height: map-get($ruleset, 'line-height');
+	$family: map-get($ruleset, 'font-family');
+	$initial-font-rule: #{$weight} #{$size}/#{$line-height} #{$family};
+
+	@if ($mode !='mobile') {
+		@if (map-has-key($ruleset, $mode)) {
+			$ruleset: map-get($ruleset, $mode);
+
+			@if (map-has-key($ruleset, 'font-weight')) {
+				$weight: map-get($ruleset, 'font-weight');
+			}
+
+			@if (map-has-key($ruleset, 'font-size')) {
+				$size: map-get($ruleset, 'font-size');
+			}
+
+			@if (map-has-key($ruleset, 'line-height')) {
+				$line-height: map-get($ruleset, 'line-height');
+			}
+			@if (map-has-key($ruleset, 'font-family')) {
+				$family: map-get($ruleset, 'font-family');
+			}
+			$overriden-font-rule: #{$weight} #{$size}/#{$line-height} #{$family};
+			@if ($overriden-font-rule != $initial-font-rule) {
+				font: $overriden-font-rule;
+			}
+		}
+	} @else {
+		font: $initial-font-rule;
+	}
+
+}
+
+@mixin make-font-property($type, $property, $mode: 'mobile', ) {
+	$property-value: null;
+	@if ($mode == 'mobile') {
+		$property-value: map-deep-get($local-font-rules, $type, $property);
+	} @else {
+		$property-value: map-deep-get($local-font-rules, $type, $mode, $property);
+	}
+
+	@if ($property-value) {
+		#{$property}: #{$property-value};
+	}
+}
+
+@mixin make-font-property-responsive($type, $property ) {
+	$ruleset: map-get($local-font-rules, $type);
+	@include make-font-property($type, $property, 'mobile');
+	@if (map-has-key($ruleset, 'tablet')) {
+		@include media-breakpoint-up(md) {
+			@include make-font-property($type, $property, 'tablet');
+		}
+	}
+
+	@if (map-has-key($ruleset, 'desktop')) {
+		@include media-breakpoint-up($bp) {
+			@include make-font-property($type, $property, 'desktop');
+		}
+	}
+}
+
+@mixin make-font-margin-bottom($type, $mode: 'mobile', ) {
+	@include make-font-property($type, 'margin-bottom', $mode);
+}
+
+@mixin make-font-letter-spacing($type, $mode: 'mobile', ) {
+	@include make-font-property($type, 'letter-spacing', $mode);
+	//$letter-spacing: map-deep-get($local-font-rules, $type, $mode, 'letter-spacing');
+	//@if ($letter-spacing != 0) {
+	//	letter-spacing: #{$letter-spacing};
+	//}
+}
+
+@mixin make-font-style-responsive( $type: 'body') {
+	$ruleset: map-get($local-font-rules, $type);
+
+	@include make-font-style($type, 'mobile');
+	@include make-font-letter-spacing($type, 'mobile');
+	@include make-font-property($type, 'make-font-property', 'mobile');
+
+	@if (map-has-key($ruleset, 'tablet')) {
+		@include media-breakpoint-up(md) {
+			@include make-font-style($type, 'tablet');
+			@include make-font-letter-spacing($type, 'tablet');
+			@include make-font-property($type, 'make-font-property', 'tablet');
+		}
+	}
+
+	@if (map-has-key($ruleset, 'desktop')) {
+		@include media-breakpoint-up($bp) {
+			@include make-font-style($type, 'desktop');
+			@include make-font-letter-spacing($type, 'desktop');
+			@include make-font-property($type, 'make-font-property', 'desktop');
+		}
+	}
+}
+
+@mixin make-margin-bottom-responsive( $type: 'body') {
+	$ruleset: map-get($local-font-rules, $type);
+
+	@include make-font-margin-bottom($type, 'mobile');
+
+	@if (map-has-key($ruleset, 'tablet')) {
+		@include media-breakpoint-up(md) {
+			@include make-font-margin-bottom($type, 'tablet');
+		}
+	}
+	@if (map-has-key($ruleset, 'desktop')) {
+		@include media-breakpoint-up($bp) {
+			@include make-font-margin-bottom($type, 'desktop');
+		}
+	}
+}
+
+
+// in XD it's H1
+@mixin h1-title {
+	@include make-font-style-responsive(h-1);
+	@include make-margin-bottom-responsive(h-1);
+	@include make-font-property-responsive(h-1, letter-spacing);
+	@include make-font-property-responsive(h-1, word-spacing);
+	//font-weight: 700;
+	//font-size: rem(4);
+	//line-height: 1;
+	///// $headings-font
+	////letter-spacing: rems(-10) ;
+	//letter-spacing: -0.13em;
+	//word-spacing: 0.13em;
+	text-transform: uppercase;
+	//
+	//@include media-breakpoint-up(md) {
+	//font-size: rem(5);
+	//@include make-font-style(h-1-title, tablet);
+	//}
+
+	//@include media-breakpoint-up(lg) {
+	//font-size: rem(7.5);
+	//@include make-font-style(h-1-title, desktop);
+	//}
+
+
+}
+
+// in XD it's H2
+@mixin h1 {
+	//font: 700 rems(4) /1 $headings-font;
+	//letter-spacing: rems(-7.5) ;
+	@include make-font-style-responsive(h-1);
+	@include make-margin-bottom-responsive(h-1);
+	@include make-font-property-responsive(h-1, letter-spacing);
+	@include make-font-property-responsive(h-1, word-spacing);
+	text-transform: uppercase;
+	//font-weight: 700;
+	//font-size: rem(4);
+	//line-height: 1;
+	//
+	//text-transform: uppercase;
+	//@include media-breakpoint-up(sm) {
+	//	font-size: rem(5);
+	//}
+	//@include media-breakpoint-up(xxl) {
+	//	font-size: rem(6);
+	//}
+}
+
+@mixin h2 {
+	//font: 700 rems(4) /1 $headings-font;
+	//font-weight: 700;
+	//font-size: rem(4);
+	//line-height: 1;
+	////letter-spacing: rems(-7.5) ;
+
+	//@include media-breakpoint-up(sm) {
+	//	font-size: rem(5);
+	//}
+	//@include media-breakpoint-up(xxl) {
+	//	font-size: rem(6);
+	//}
+	@include make-font-style-responsive(h-2);
+	@include make-margin-bottom-responsive(h-1);
+	@include make-font-property-responsive(h-1, letter-spacing);
+	@include make-font-property-responsive(h-1, word-spacing);
+	text-transform: uppercase;
+}
+
+@mixin h3 {
+	//font: 700 rems(2.6)/1.2 $content-font;
+	//font-weight: 700;
+	//font-size: rem(2.6);
+	//line-height: 1.2;
+	////letter-spacing: rems(-5) ;
+	//@include media-breakpoint-up(xxl) {
+	//	font-size: rem(3);
+	//}
+	@include make-font-style-responsive(h-3);
+	@include make-margin-bottom-responsive(h-3);
+}
+
+@mixin h4 {
+	//font: 700 rems(1.8)/1.2 $content-font;
+	//font-weight: 700;
+	//font-size: rem(1.8);
+	//line-height: 1.2;
+	////letter-spacing: rems(-5) ;
+	//@include media-breakpoint-up(xxl) {
+	//	font-size: rem(2.2);
+	//}
+	@include make-font-style-responsive(h-4);
+	@include make-margin-bottom-responsive(h-4);
+}
+
+@mixin h5 {
+	//font-weight: 700;
+	//font-size: rem(1.6);
+	//line-height: 1.5;
+	////font: 700 rems(1.6)/1.2 $content-font;
+	////letter-spacing: rems(-5) ;
+	//@include media-breakpoint-up(xxl) {
+	//	font-size: rem(2);
+	//}
+	@include make-font-style-responsive(h-5);
+	@include make-margin-bottom-responsive(h-5);
+}
+
+@mixin h6 {
+	//@include h5;
+	@include make-font-style-responsive(h-6);
+	@include make-margin-bottom-responsive(h-6);
+}
+
+//-----------------------------------
+@mixin p {
+	//font: 400 rems(1.6)/1.5 $content-font;
+	@include make-font-style-responsive(body);
+	@include make-margin-bottom-responsive(body);
+}
+
+@mixin tight-text {
+	letter-spacing: -0.13em;
+	word-spacing: 0.2em;
+}
+
+@mixin subtext {
+	font: 400 rems(1.4)/1.375 $content-font;
+	@include media-breakpoint-up(xxl) {
+		font-size: rem(1.6);
+	}
+	//letter-spacing: rems(-5) ;
+}
+
+@mixin caption {
+	font: 400 rems(1.3)/1.4 $content-font;
+	@include media-breakpoint-up(xxl) {
+		font-size: rem(1.5);
+	}
+	//letter-spacing: rems(-5) ;
+}
+
+
+@mixin highlight($color: $blue) {
+	$highlight-svg-bg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="0" y="68" width="100" height="32" fill="#{$color}"/></svg>';
+	//background-image: url('data:image/svg+xml;charset=utf-8,#{url-encode($highlight-svg-bg)}');
+	@include inline-svg-bg($highlight-svg-bg);
+}
+
+@mixin link-color-arrow-svg-bg($color: $red) {
+	$arrow-svg: '<svg xmlns="http://www.w3.org/2000/svg" width="6.216" height="11.757" viewBox="0 0 6.216 11.757"><path d="M10906.959,179.039l6.216,5.861-6.216,5.9,2.044-5.9Z" transform="translate(-10906.959 -179.039)" fill="#{$color}"/></svg>';
+	@include inline-svg-bg($arrow-svg);
+}
+
+@mixin link-arrow-color($color:$red) {
+	&:after {
+		content: '';
+		display: inline-block;
+		height: 0.8em;
+		width: 1em;
+		@include link-color-arrow-svg-bg($color);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center right;
+		vertical-align: middle;
+	}
+}
+
+@mixin slash-gold-before() {
+	position: relative;
+	padding-left: 1em;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		width: 1em;
+		height: 1em;
+		background-image: url('../images/double-forward-slash-gold.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+
+}
+
+@mixin slash-green-before() {
+	position: relative;
+	padding-left: 1em;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		width: 1em;
+		height: 1em;
+		background-image: url('../images/double-forward-slash-green.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+}
+
+@mixin parentheses-before() {
+	position: relative;
+	padding-left: 0.5em;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		width: 0.5em;
+		height: 1em;
+		background-image: url('../images/parentheses.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+}
+
+
+@mixin gold-arrow-down-right-before() {
+	position: relative;
+	padding-left: 1.2em;
+	@include media-breakpoint-up($bp) {
+		margin-left: -1.3em;
+	}
+
+	&:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		top: -0.12em;
+		width: 1em;
+		height: 1em;
+		background-image: url('../images/gold-arrow-down-right.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+
+}
+
+@mixin gold-plus-before() {
+	position: relative;
+
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		left: -0.5em;
+		top: -0.62em;
+		width: 1em;
+		height: 1em;
+		background-image: url('../images/gold-plus.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		font-size: 1.5em;
+	}
+
+}
+
+@mixin container-with-slash-heading() {
+	h1, h2 {
+		padding-left: 1em;
+		@include media-breakpoint-up(hd) {
+			margin-left: -1em;
+		}
+	}
+}
